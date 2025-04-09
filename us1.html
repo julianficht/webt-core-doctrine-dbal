@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>RPS Tournament Prototype</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .date {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .round {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .round:last-child {
+            border-bottom: none;
+        }
+
+        .player, .symbol, .datetime {
+            flex: 1 1 30%;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        @media (max-width: 600px) {
+            .round {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>RPS Championship Finals</h1>
+    <div class="date">April 9, 2025</div>
+
+    <div class="round">
+        <div class="player">Player: Alice</div>
+        <div class="symbol">Picked: 🪨 Rock</div>
+        <div class="datetime">Time: 10:05 AM</div>
+    </div>
+
+    <div class="round">
+        <div class="player">Player: Bob</div>
+        <div class="symbol">Picked: 📄 Paper</div>
+        <div class="datetime">Time: 10:07 AM</div>
+    </div>
+
+    <div class="round">
+        <div class="player">Player: Charlie</div>
+        <div class="symbol">Picked: ✂️ Scissors</div>
+        <div class="datetime">Time: 10:10 AM</div>
+    </div>
+
+    <div class="round">
+        <div class="player">Player: Dana</div>
+        <div class="symbol">Picked: 📄 Paper</div>
+        <div class="datetime">Time: 10:12 AM</div>
+    </div>
+
+    <div class="round">
+        <div class="player">Player: Evan</div>
+        <div class="symbol">Picked: 🪨 Rock</div>
+        <div class="datetime">Time: 10:15 AM</div>
+    </div>
+</div>
+</body>
+</html>
