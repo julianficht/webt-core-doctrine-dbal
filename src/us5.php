@@ -28,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <title>Spielzug Hinzufügen:</title>
- 
+
 </head>
 <body>
 
   <h1>Neue Runde:</h1>
 
   <form method="post">
-    <label>SPieler:
+    <label>Spieler:
       <input type="text" name="player_name" required>
     </label>
 
