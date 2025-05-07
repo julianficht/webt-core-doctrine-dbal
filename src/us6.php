@@ -33,7 +33,7 @@ $rounds = $conn->fetchAllAssociative('SELECT * FROM game_rounds ORDER BY played_
 </head>
 <body>
 
-  <h1>Aufzeichnung von den Runden</h1>
+  <h1>History</h1>
 
   <?php foreach ($rounds as $round): ?>
     <div class="round">
@@ -42,7 +42,7 @@ $rounds = $conn->fetchAllAssociative('SELECT * FROM game_rounds ORDER BY played_
         <small><?= htmlspecialchars($round['played_at']) ?></small>
       </div>
       <div>
-        <a class="delete" href="?delete=<?= $round['id'] ?>" onclick="return confirm('Diesen Eintrag wirklich löschen?');">Löschen</a>
+        <a class="delete" href="?delete=<?= $round['id'] ?>" onclick="return confirm('Bestätige:');">Löschen</a>
       </div>
     </div>
   <?php endforeach; ?>
