@@ -29,7 +29,7 @@ $rounds = $conn->fetchAllAssociative('SELECT * FROM game_rounds ORDER BY played_
 </head>
 <body>
 
-  <h1>USARPS Championship – 7. Mai 2025</h1>
+  <h1>USARPS Championship – 2. Mai 2025</h1>
 
   <?php foreach ($rounds as $round): ?>
     <div class="round">

@@ -25,7 +25,7 @@ $rounds = $conn->fetchAllAssociative('SELECT * FROM game_rounds ORDER BY played_
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Spielrunden löschen</title>
+  <title>Spielrunde rauslöschen</title>
   <style>
     .round { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; }
     a.delete { color: red; text-decoration: none; font-weight: bold; }
@@ -33,7 +33,7 @@ $rounds = $conn->fetchAllAssociative('SELECT * FROM game_rounds ORDER BY played_
 </head>
 <body>
 
-  <h1>Spielrundenverwaltung</h1>
+  <h1>Aufzeichnung von den Runden</h1>
 
   <?php foreach ($rounds as $round): ?>
     <div class="round">

@@ -27,31 +27,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Neue Spielrunde erfassen</title>
+  <title>Neue Runde:</title>
   <style>
     form { max-width: 400px; margin: 20px auto; display: flex; flex-direction: column; gap: 10px; }
     input, select { padding: 8px; }
-    button { padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; }
+    button { padding: 10px; background-color: black; color: white; }
   </style>
 </head>
 <body>
 
-  <h1>Neue Spielrunde erfassen</h1>
+  <h1>Neue Runde:</h1>
 
   <form method="post">
-    <label>Spielername:
+    <label>SPieler:
       <input type="text" name="player_name" required>
     </label>
 
     <label>Zug:
       <select name="move" required>
-        <option value="rock">✊ Rock</option>
-        <option value="paper">✋ Paper</option>
-        <option value="scissors">✌ Scissors</option>
+        <option value="rock">🪨 Rock</option>
+        <option value="paper">📝 Paper</option>
+        <option value="scissors"> ✌ Scissors</option>
       </select>
     </label>
 
-    <label>Datum & Uhrzeit:
+    <label>Datum & Zeit:
       <input type="datetime-local" name="played_at" required>
     </label>
 
