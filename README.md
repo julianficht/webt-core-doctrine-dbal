@@ -1,3 +1,47 @@
+# USARPS Championship Tracker
+
+A web application for tracking Rock Paper Scissors tournament rounds using PHP and Doctrine DBAL.
+
+## Setup Instructions
+
+1. Install dependencies:
+```bash
+composer install
+```
+
+2. Create the database:
+```sql
+CREATE DATABASE rps_tournament;
+```
+
+3. Import the database schema:
+```bash
+mysql -u root -p rps_tournament < src/Config/database_schema.sql
+```
+
+4. Import the seed data:
+```bash
+mysql -u root -p rps_tournament < src/Config/seed_data.sql
+```
+
+5. Configure your web server to point to the `public` directory.
+
+6. Update database credentials in `src/Config/Database.php` if needed.
+
+## Features
+
+- View tournament rounds
+- Add new game rounds
+- Delete game rounds
+- Responsive design with Bootstrap 5
+
+## Requirements
+
+- PHP 7.4 or higher
+- MySQL 5.7 or higher
+- Composer
+- Web server (Apache/Nginx)
+
 # WEBT | CORE | Doctrine DBAL
 
 ## Overview
@@ -23,7 +67,7 @@ https://www.youtube.com/watch?v=6yrdT5y12kA
 - The create statements are available as SQL file
 
 ## User Story 3
-*As a Developer I want to insert test data into the database (aka “seed the database”), so that the retrieval and display of data can later be tested.*
+*As a Developer I want to insert test data into the database (aka "seed the database"), so that the retrieval and display of data can later be tested.*
 
 ### Acceptance Criteria
 - The database contains information about at least 5 rounds of RPS (see user story 2 for a round definition).
