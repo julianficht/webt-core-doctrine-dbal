@@ -15,7 +15,6 @@ $conn = DriverManager::getConnection($connectionParams);
 
 if (isset($_GET['delete'])) {
     $conn->delete('game_rounds', ['id' => $_GET['delete']]);
-    echo "<p>Eintrag gelöscht.</p>";
 }
 
 $rounds = $conn->fetchAllAssociative('SELECT * FROM game_rounds ORDER BY played_at ASC');
