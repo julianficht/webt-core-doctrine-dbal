@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once 'C:\xampp\htdocs\Folkswagen\webt-core-doctrine-dbal\vendor\autoload.php';
 
 use Doctrine\DBAL\DriverManager;
 
@@ -13,7 +13,6 @@ $connectionParams = [
 ];
 $conn = DriverManager::getConnection($connectionParams);
 
-// Löschen, falls ID übergeben wurde
 if (isset($_GET['delete'])) {
     $conn->delete('game_rounds', ['id' => $_GET['delete']]);
     echo "<p>Eintrag gelöscht.</p>";

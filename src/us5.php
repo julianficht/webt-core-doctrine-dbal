@@ -1,6 +1,6 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once 'C:\xampp\htdocs\Folkswagen\webt-core-doctrine-dbal\vendor\autoload.php';
 
 use Doctrine\DBAL\DriverManager;
 
@@ -13,7 +13,6 @@ $connectionParams = [
 ];
 $conn = DriverManager::getConnection($connectionParams);
 
-// Formularverarbeitung
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn->insert('game_rounds', [
         'player_name' => $_POST['player_name'],
