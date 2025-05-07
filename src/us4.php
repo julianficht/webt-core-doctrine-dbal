@@ -21,7 +21,7 @@ $rounds = $conn->fetchAllAssociative('SELECT * FROM game_rounds ORDER BY played_
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>USARPS Championship – Ergebnisse</title>
+  <title>USARPS Championship – die Ergebnise</title>
   <style>
     body { font-family: sans-serif; padding: 20px; }
     .round { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 8px; }
