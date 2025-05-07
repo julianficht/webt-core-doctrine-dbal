@@ -1,0 +1,64 @@
+<?php
+
+require_once 'vendor/autoload.php';
+
+use Doctrine\DBAL\DriverManager;
+
+$connectionParams = [
+    'dbname' => 'usarps',
+    'user' => 'root',
+    'password' => '',
+    'host' => '127.0.0.1',
+    'driver' => 'pdo_mysql',
+];
+$conn = DriverManager::getConnection($connectionParams);
+
+// Formularverarbeitung
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $conn->insert('game_rounds', [
+        'player_name' => $_POST['player_name'],
+        'move' => $_POST['move'],
+        'played_at' => $_POST['played_at']
+    ]);
+    echo "<p>Neuer Eintrag gespeichert!</p>";
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Neue Spielrunde erfassen</title>
+  <style>
+    form { max-width: 400px; margin: 20px auto; display: flex; flex-direction: column; gap: 10px; }
+    input, select { padding: 8px; }
+    button { padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+  <h1>Neue Spielrunde erfassen</h1>
+
+  <form method="post">
+    <label>Spielername:
+      <input type="text" name="player_name" required>
+    </label>
+
+    <label>Zug:
+      <select name="move" required>
+        <option value="rock">✊ Rock</option>
+        <option value="paper">✋ Paper</option>
+        <option value="scissors">✌ Scissors</option>
+      </select>
+    </label>
+
+    <label>Datum & Uhrzeit:
+      <input type="datetime-local" name="played_at" required>
+    </label>
+
+    <button type="submit">Eintragen</button>
+  </form>
+
+</body>
+</html>
