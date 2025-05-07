@@ -1,14 +1,17 @@
 {
-    "name": "student/rps-tournament",
-    "description": "Rock Paper Scissors Tournament Tracker",
-    "type": "project",
-    "require": {
-        "php": ">=7.4",
-        "doctrine/dbal": "^3.3"
-    },
+    "name": "startklar/webt-core-doctrine-dbal",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Startklar\\WebtCoreDoctrineDbal\\": "src/"
         }
+    },
+    "authors": [
+        {
+            "name": "OriHatza",
+            "email": "1128@htl.rennweg.at"
+        }
+    ],
+    "require": {
+        "doctrine/dbal": "^4.2"
     }
-} 
+}
