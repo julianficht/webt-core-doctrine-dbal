@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'move' => $_POST['move'],
         'played_at' => $_POST['played_at']
     ]);
+    header("location:us6.php");
 }
 
 ?>
