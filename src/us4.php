@@ -34,7 +34,7 @@ $rounds = $conn->fetchAllAssociative('SELECT * FROM game_rounds ORDER BY played_
   <?php foreach ($rounds as $round): ?>
     <div class="round">
       <strong>Spieler:</strong> <?= htmlspecialchars($round['player_name']) ?><br>
-      <strong>Zug:</strong> <?= htmlspecialchars($round['move']) ?><br>
+      <strong>Move:</strong> <?= htmlspecialchars($round['move']) ?><br>
       <strong>Datum:</strong> <?= htmlspecialchars($round['played_at']) ?>
     </div>
   <?php endforeach; ?>
