@@ -27,12 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Neue Runde:</title>
-  <style>
-    form { max-width: 400px; margin: 20px auto; display: flex; flex-direction: column; gap: 10px; }
-    input, select { padding: 8px; }
-    button { padding: 10px; background-color: black; color: white; }
-  </style>
+  <title>Spielzug Hinzufügen:</title>
+ 
 </head>
 <body>
 
