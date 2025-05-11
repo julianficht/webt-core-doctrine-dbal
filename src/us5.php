@@ -14,12 +14,26 @@ $connectionParams = [
 $conn = DriverManager::getConnection($connectionParams);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Schritt 1: Runde eintragen
     $conn->insert('game_rounds', [
-        'player_name' => $_POST['player_name'],
-        'move' => $_POST['move'],
         'played_at' => $_POST['played_at']
     ]);
-    header("location:us6.php");
+    $roundId = $conn->lastInsertId();
+
+    // Schritt 2: Spielerzüge eintragen
+    $conn->insert('game_moves', [
+        'round_id' => $roundId,
+        'player_name' => $_POST['player1_name'],
+        'move' => $_POST['player1_move']
+    ]);
+    $conn->insert('game_moves', [
+        'round_id' => $roundId,
+        'player_name' => $_POST['player2_name'],
+        'move' => $_POST['player2_move']
+    ]);
+
+    header("Location: us6.php");
+    exit;
 }
 
 ?>
@@ -27,33 +41,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Spielzug Hinzufügen:</title>
-
+    <meta charset="UTF-8">
+    <title>Neue Runde erfassen</title>
 </head>
 <body>
 
-  <h1>Neue Runde:</h1>
+<h1>Neue Spielrunde eintragen</h1>
 
-  <form method="post">
-    <label>Spieler:
-      <input type="text" name="player_name" required>
-    </label>
+<form method="post">
+    <fieldset>
+        <legend>Spieler 1</legend>
+        <label>Name:
+            <input type="text" name="player1_name" required>
+        </label><br>
+        <label>Zug:
+            <select name="player1_move" required>
+                <option value="rock">🪨 Rock</option>
+                <option value="paper">📝 Paper</option>
+                <option value="scissors">✌ Scissors</option>
+            </select>
+        </label>
+    </fieldset>
 
-    <label>Zug:
-      <select name="move" required>
-        <option value="rock">🪨 Rock</option>
-        <option value="paper">📝 Paper</option>
-        <option value="scissors"> ✌ Scissors</option>
-      </select>
-    </label>
+    <fieldset>
+        <legend>Spieler 2</legend>
+        <label>Name:
+            <input type="text" name="player2_name" required>
+        </label><br>
+        <label>Zug:
+            <select name="player2_move" required>
+                <option value="rock">🪨 Rock</option>
+                <option value="paper">📝 Paper</option>
+                <option value="scissors">✌ Scissors</option>
+            </select>
+        </label>
+    </fieldset>
 
-    <label>Datum & Zeit:
-      <input type="datetime-local" name="played_at" required>
-    </label>
+    <label>Datum & Zeit der Runde:
+        <input type="datetime-local" name="played_at" required>
+    </label><br><br>
 
-    <button type="submit">Eintragen</button>
-  </form>
+    <button type="submit">Runde speichern</button>
+</form>
 
 </body>
 </html>
