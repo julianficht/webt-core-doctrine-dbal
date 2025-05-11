@@ -13,15 +13,6 @@ $connectionParams = [
 ];
 $conn = DriverManager::getConnection($connectionParams);
 
-if (isset($_GET['delete'])) {
-    $roundId = $_GET['delete'];
-    // Zuerst Züge löschen
-    $conn->delete('game_moves', ['round_id' => $roundId]);
-    // Dann die Runde löschen
-    $conn->delete('game_rounds', ['id' => $roundId]);
-}
-
-// Alle Runden + Spielerzüge laden
 $sql = "
     SELECT 
         r.id AS round_id,
@@ -35,20 +26,32 @@ $sql = "
 
 $rows = $conn->fetchAllAssociative($sql);
 
-// Runden gruppieren
 $groupedRounds = [];
 foreach ($rows as $row) {
-    $id = $row['round_id'];
-    if (!isset($groupedRounds[$id])) {
-        $groupedRounds[$id] = [
+    $roundId = $row['round_id'];
+    if (!isset($groupedRounds[$roundId])) {
+        $groupedRounds[$roundId] = [
             'played_at' => $row['played_at'],
-            'players' => []
+            'players' => [],
         ];
     }
-    $groupedRounds[$id]['players'][] = [
+    $groupedRounds[$roundId]['players'][] = [
         'name' => $row['player_name'],
-        'move' => $row['move']
+        'move' => $row['move'],
     ];
+}
+
+function getMoveEmoji($move) {
+    switch ($move) {
+        case 'rock':
+            return '🪨'; // Emoji für Rock
+        case 'paper':
+            return '📝'; // Emoji für Paper
+        case 'scissors':
+            return '✌'; // Emoji für Scissors
+        default:
+            return ''; // Falls der Zug ungültig ist
+    }
 }
 
 ?>
@@ -57,23 +60,26 @@ foreach ($rows as $row) {
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Runden löschen</title>
+    <title>USARPS Championship – Ergebnisse</title>
     <style>
+        body { font-family: sans-serif; padding: 20px; }
         .round { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 8px; }
-        .delete { color: red; text-decoration: none; font-weight: bold; }
+        .player { margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-<h1>Spielrunden verwalten</h1>
+<h1>USARPS Championship</h1>
 
-<?php foreach ($groupedRounds as $id => $round): ?>
+<?php foreach ($groupedRounds as $round): ?>
     <div class="round">
         <div><strong>Datum:</strong> <?= htmlspecialchars($round['played_at']) ?></div>
         <?php foreach ($round['players'] as $player): ?>
-            <div><?= htmlspecialchars($player['name']) ?> – <?= htmlspecialchars($player['move']) ?></div>
+            <div class="player">
+                <strong>Spieler:</strong> <?= htmlspecialchars($player['name']) ?> –
+                <strong>Zug:</strong> <?= getMoveEmoji($player['move']) ?> <?= htmlspecialchars(ucfirst($player['move'])) ?>
+            </div>
         <?php endforeach; ?>
-        <a class="delete" href="?delete=<?= $id ?>" onclick="return confirm('Runde wirklich löschen?');">🗑️ Löschen</a>
     </div>
 <?php endforeach; ?>
 
