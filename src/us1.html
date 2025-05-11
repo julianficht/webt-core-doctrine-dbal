@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,59 +16,83 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
     }
     .round {
       border: 1px solid #ccc;
       padding: 10px;
       border-radius: 8px;
+    }
+    .players {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
     }
-    .round span {
-      flex: 1 1 30%;
+    .player {
+      flex: 1 1 45%;
+      margin-bottom: 10px;
+    }
+    .date {
+      text-align: right;
+      font-size: 0.9em;
+      color: #555;
     }
     @media (max-width: 500px) {
-      .round span {
+      .player {
         flex: 1 1 100%;
-        margin-bottom: 5px;
+      }
+      .date {
+        text-align: left;
       }
     }
   </style>
 </head>
 <body>
 
-  <h1>USARPS Championship – 2. Mai 2025</h1>
+<h1>USARPS Championship – 2. Mai 2025</h1>
 
-  <div class="rounds">
-    <div class="round">
-      <span><strong>Spieler:</strong> Alice</span>
-      <span><strong>Wahl:</strong> 🪨 Rock</span>
-      <span><strong>Datum:</strong> 2025-05-07 14:00</span>
+<div class="rounds">
+  <div class="round">
+    <div class="players">
+      <div class="player"><strong>Spieler:</strong> Tobias<br><strong>Wahl:</strong> 🪨 Rock</div>
+      <div class="player"><strong>Spieler:</strong> Schuh<br><strong>Wahl:</strong> 📝 Paper</div>
     </div>
-    <div class="round">
-      <span><strong>Spieler:</strong> Bob</span>
-      <span><strong>Wahl:</strong> 📝 Paper</span>
-      <span><strong>Datum:</strong> 2025-05-07 14:02</span>
-    </div>
-    <div class="round">
-      <span><strong>Spieler:</strong> Charlie</span>
-      <span><strong>Wahl:</strong> ✌ Scissors</span>
-      <span><strong>Datum:</strong> 2025-05-07 14:04</span>
-    </div>
-    <div class="round">
-      <span><strong>Spieler:</strong> Dana</span>
-      <span><strong>Wahl:</strong> 🪨 Rock</span>
-      <span><strong>Datum:</strong> 2025-05-07 14:06</span>
-    </div>
-    <div class="round">
-      <span><strong>Spieler:</strong> Eli</span>
-      <span><strong>Wahl:</strong> ✌ Scissors</span>
-      <span><strong>Datum:</strong> 2025-05-07 14:08</span>
-    </div>
+    <div class="date"><strong>Datum:</strong> 2025-05-07 14:00</div>
   </div>
+
+  <div class="round">
+    <div class="players">
+      <div class="player"><strong>Spieler:</strong> Fidi<br><strong>Wahl:</strong> ✌ Scissors</div>
+      <div class="player"><strong>Spieler:</strong> Leo<br><strong>Wahl:</strong> 🪨 Rock</div>
+    </div>
+    <div class="date"><strong>Datum:</strong> 2025-05-07 14:06</div>
+  </div>
+
+  <div class="round">
+    <div class="players">
+      <div class="player"><strong>Spieler:</strong> Moritz<br><strong>Wahl:</strong> ✌ Scissors</div>
+      <div class="player"><strong>Spieler:</strong> Bernhard<br><strong>Wahl:</strong> 📝 Paper</div>
+    </div>
+    <div class="date"><strong>Datum:</strong> 2025-05-07 14:12</div>
+  </div>
+
+  <div class="round">
+    <div class="players">
+      <div class="player"><strong>Spieler:</strong> Julian<br><strong>Wahl:</strong> ✌ Scissors</div>
+      <div class="player"><strong>Spieler:</strong> Nico<br><strong>Wahl:</strong> 📝 Paper</div>
+    </div>
+    <div class="date"><strong>Datum:</strong> 2025-05-07 14:12</div>
+  </div>
+
+  <div class="round">
+    <div class="players">
+      <div class="player"><strong>Spieler:</strong> Daniel<br><strong>Wahl:</strong> ✌ Scissors</div>
+      <div class="player"><strong>Spieler:</strong> Erik<br><strong>Wahl:</strong> 📝 Paper</div>
+    </div>
+    <div class="date"><strong>Datum:</strong> 2025-05-07 14:12</div>
+  </div>
+</div>
 
 </body>
 </html>
