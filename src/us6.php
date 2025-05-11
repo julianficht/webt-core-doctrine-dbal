@@ -116,6 +116,6 @@ foreach ($groupedRounds as $roundId => $round) {
 }
 ?>
 
-}
+
 </body>
 </html>
