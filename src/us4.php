@@ -26,23 +26,27 @@ $sql = "
 
 $rows = $conn->fetchAllAssociative($sql);
 
-// Gruppiere die Daten nach Runde
 $groupedRounds = [];
 foreach ($rows as $row) {
+
     $roundId = $row['round_id'];
+
     if (!isset($groupedRounds[$roundId])) {
         $groupedRounds[$roundId] = [
             'played_at' => $row['played_at'],
-            'players' => [],
+            'players' => []
         ];
     }
-    $groupedRounds[$roundId]['players'][] = [
+
+    $player = [
         'name' => $row['player_name'],
-        'move' => $row['move'],
+        'move' => $row['move']
     ];
+
+    $groupedRounds[$roundId]['players'][] = $player;
+
 }
 
-// Funktion, um Emojis basierend auf dem Zug zuzuordnen
 function getMoveEmoji($move) {
     switch ($move) {
         case 'rock':
