@@ -41,6 +41,21 @@ foreach ($rows as $row) {
         'move' => $row['move'],
     ];
 }
+
+// Funktion, um Emojis basierend auf dem Zug zuzuordnen
+function getMoveEmoji($move) {
+    switch ($move) {
+        case 'rock':
+            return '🪨'; // Emoji für Rock
+        case 'paper':
+            return '📝'; // Emoji für Paper
+        case 'scissors':
+            return '✌'; // Emoji für Scissors
+        default:
+            return ''; // Falls der Zug ungültig ist
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +79,7 @@ foreach ($rows as $row) {
         <?php foreach ($round['players'] as $player): ?>
             <div class="player">
                 <strong>Spieler:</strong> <?= htmlspecialchars($player['name']) ?> –
-                <strong>Zug:</strong> <?= htmlspecialchars($player['move']) ?>
+                <strong>Zug:</strong> <?= getMoveEmoji($player['move']) ?> <?= htmlspecialchars(ucfirst($player['move'])) ?>
             </div>
         <?php endforeach; ?>
     </div>
