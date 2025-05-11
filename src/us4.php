@@ -77,17 +77,24 @@ function getMoveEmoji($move) {
 
 <h1>USARPS Championship</h1>
 
-<?php foreach ($groupedRounds as $round): ?>
-    <div class="round">
-        <div><strong>Datum:</strong> <?= htmlspecialchars($round['played_at']) ?></div>
-        <?php foreach ($round['players'] as $player): ?>
-            <div class="player">
-                <strong>Spieler:</strong> <?= htmlspecialchars($player['name']) ?> –
-                <strong>Zug:</strong> <?= getMoveEmoji($player['move']) ?> <?= htmlspecialchars(ucfirst($player['move'])) ?>
-            </div>
-        <?php endforeach; ?>
-    </div>
-<?php endforeach; ?>
+<?php
+foreach ($groupedRounds as $round) {
+    echo '<div class="round">';
+    echo '<div><strong>Datum:</strong> ' . htmlspecialchars($round['played_at']) . '</div>';
+
+    foreach ($round['players'] as $player) {
+        $name = htmlspecialchars($player['name']);
+        $move = htmlspecialchars(ucfirst($player['move']));
+        $emoji = getMoveEmoji($player['move']);
+
+        echo '<div class="player">';
+        echo "<strong>Spieler:</strong> $name – <strong>Zug:</strong> $emoji $move";
+        echo '</div>';
+    }
+
+    echo '</div>';
+}
+?>
 
 </body>
 </html>
