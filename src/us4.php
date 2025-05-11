@@ -28,9 +28,9 @@ $rows = $conn->fetchAllAssociative($sql);
 
 $groupedRounds = [];
 foreach ($rows as $row) {
-
     $roundId = $row['round_id'];
 
+    // Prüfen, ob diese Runde schon existiert
     if (!isset($groupedRounds[$roundId])) {
         $groupedRounds[$roundId] = [
             'played_at' => $row['played_at'],
@@ -44,7 +44,6 @@ foreach ($rows as $row) {
     ];
 
     $groupedRounds[$roundId]['players'][] = $player;
-
 }
 
 function getMoveEmoji($move) {

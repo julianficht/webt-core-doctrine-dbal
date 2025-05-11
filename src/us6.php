@@ -34,28 +34,30 @@ $sql = "
 
 $rows = $conn->fetchAllAssociative($sql);
 
-// 🧮 Gruppieren nach Runden
 $groupedRounds = [];
 foreach ($rows as $row) {
-    $id = $row['round_id'];
-    if (!isset($groupedRounds[$id])) {
-        $groupedRounds[$id] = [
+    $roundId = $row['round_id'];
+
+    if (!isset($groupedRounds[$roundId])) {
+        $groupedRounds[$roundId] = [
             'played_at' => $row['played_at'],
             'players' => []
         ];
     }
-    $groupedRounds[$id]['players'][] = [
+
+    $player = [
         'name' => $row['player_name'],
         'move' => $row['move']
     ];
+
+    $groupedRounds[$roundId]['players'][] = $player;
 }
 
-// 🎨 Emojis anzeigen
 function getMoveEmoji(string $move): string {
     return match ($move) {
-        'rock' => '🪨 Rock',
-        'paper' => '📝 Paper',
-        'scissors' => '✌ Scissors',
+        'rock' => '🪨',
+        'paper' => '📝',
+        'scissors' => '✌',
         default => htmlspecialchars($move)
     };
 }
@@ -89,18 +91,31 @@ function getMoveEmoji(string $move): string {
 
 <h1>Alle Spielrunden</h1>
 
-<?php foreach ($groupedRounds as $id => $round): ?>
-    <div class="round">
-        <div><strong>Datum:</strong> <?= htmlspecialchars($round['played_at']) ?></div>
-        <?php foreach ($round['players'] as $player): ?>
-            <div class="player">
-                <strong>Spieler:</strong> <?= htmlspecialchars($player['name']) ?> – <?= getMoveEmoji($player['move']) ?>
-            </div>
-        <?php endforeach; ?>
-        <br>
-        <a class="delete" href="?delete=<?= $id ?>" onclick="return confirm('Runde wirklich löschen?');">🗑️ Löschen</a>
-    </div>
-<?php endforeach; ?>
+<?php
+// Durchlauf aller Runden
+foreach ($groupedRounds as $roundId => $round) {
+    echo '<div class="round">';
+    echo '<div><strong>Datum:</strong> ' . htmlspecialchars($round['played_at']) . '</div>';
 
+    // Durchlauf der Spieler in dieser Runde
+    foreach ($round['players'] as $player) {
+        $name = htmlspecialchars($player['name']);
+        $move = htmlspecialchars(ucfirst($player['move']));
+        $emoji = getMoveEmoji($player['move']);
+
+        echo '<div class="player">';
+        echo "<strong>Spieler:</strong> $name – <strong>Zug:</strong> $emoji $move";
+        echo '</div>';
+    }
+
+    // Löschen-Link für die Runde
+    echo '<br>';
+    echo '<a class="delete" href="?delete=' . $roundId . '" onclick="return confirm(\'Runde wirklich löschen?\');"> Eintrag Löschen</a>';
+
+    echo '</div>';
+}
+?>
+
+}
 </body>
 </html>
