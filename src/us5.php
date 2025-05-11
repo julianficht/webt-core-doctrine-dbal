@@ -14,7 +14,6 @@ $connectionParams = [
 $conn = DriverManager::getConnection($connectionParams);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Schritt 1: Runde eintragen
     $conn->insert('game_rounds', [
         'played_at' => $_POST['played_at']
     ]);
