@@ -1,6 +1,6 @@
 <?php
 
-require_once 'C:\xampp\htdocs\Folkswagen\webt-core-doctrine-dbal\vendor\autoload.php';
+require_once '../vendor/autoload.php';
 
 use Doctrine\DBAL\DriverManager;
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'move' => $_POST['player2_move']
     ]);
 
-    header("Location: us6.php");
+    header("Location: us4.php");
     exit;
 }
 

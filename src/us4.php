@@ -1,6 +1,6 @@
 <?php
 
-require_once 'C:\xampp\htdocs\Folkswagen\webt-core-doctrine-dbal\vendor\autoload.php';
+require_once '../vendor/autoload.php';
 
 use Doctrine\DBAL\DriverManager;
 
@@ -94,6 +94,11 @@ foreach ($groupedRounds as $round) {
     echo '</div>';
 }
 ?>
+<br>
+<a href="us5.php">Neue Runde</a>
+<br>
+<br>
+<a href="us6.php">Löschen</a>
 
 </body>
 </html>
