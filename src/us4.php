@@ -13,24 +13,22 @@ $connectionParams = [
 ];
 $conn = DriverManager::getConnection($connectionParams);
 
-$sql = "
-    SELECT 
-        r.id AS round_id,
-        r.played_at,
-        m.player_name,
-        m.move
-    FROM game_rounds r
-    JOIN game_moves m ON r.id = m.round_id
-    ORDER BY r.played_at ASC, m.id ASC
-";
+$qb = $conn->createQueryBuilder();
 
-$rows = $conn->fetchAllAssociative($sql);
+$qb
+    ->select('r.id AS round_id', 'r.played_at', 'm.player_name', 'm.move')
+    ->from('game_rounds', 'r')
+    ->join('r', 'game_moves', 'm', 'r.id = m.round_id')
+    ->orderBy('r.played_at', 'ASC')
+    ->addOrderBy('m.id', 'ASC');
+
+$stmt = $qb->executeQuery();
+$rows= $stmt->fetchAllAssociative();
 
 $groupedRounds = [];
 foreach ($rows as $row) {
     $roundId = $row['round_id'];
 
-    // Prüfen, ob diese Runde schon existiert
     if (!isset($groupedRounds[$roundId])) {
         $groupedRounds[$roundId] = [
             'played_at' => $row['played_at'],
@@ -49,13 +47,13 @@ foreach ($rows as $row) {
 function getMoveEmoji($move) {
     switch ($move) {
         case 'rock':
-            return '🪨'; // Emoji für Rock
+            return '🪨';
         case 'paper':
-            return '📝'; // Emoji für Paper
+            return '📝';
         case 'scissors':
-            return '✌'; // Emoji für Scissors
+            return '✌';
         default:
-            return ''; // Falls der Zug ungültig ist
+            return '';
     }
 }
 

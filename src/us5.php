@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ]);
     $roundId = $conn->lastInsertId();
 
-    // Schritt 2: Spielerzüge eintragen
     $conn->insert('game_moves', [
         'round_id' => $roundId,
         'player_name' => $_POST['player1_name'],

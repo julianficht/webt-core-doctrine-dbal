@@ -13,26 +13,23 @@ $connectionParams = [
 ];
 $conn = DriverManager::getConnection($connectionParams);
 
-// 🔁 Runde löschen
 if (isset($_GET['delete'])) {
     $roundId = $_GET['delete'];
     $conn->delete('game_moves', ['round_id' => $roundId]);
     $conn->delete('game_rounds', ['id' => $roundId]);
 }
 
-// 📥 Daten abrufen
-$sql = "
-    SELECT 
-        r.id AS round_id,
-        r.played_at,
-        m.player_name,
-        m.move
-    FROM game_rounds r
-    JOIN game_moves m ON r.id = m.round_id
-    ORDER BY r.played_at ASC, m.id ASC
-";
+$qb = $conn->createQueryBuilder();
 
-$rows = $conn->fetchAllAssociative($sql);
+$qb
+    ->select('r.id AS round_id', 'r.played_at', 'm.player_name', 'm.move')
+    ->from('game_rounds', 'r')
+    ->join('r', 'game_moves', 'm', 'r.id = m.round_id')
+    ->orderBy('r.played_at', 'ASC')
+    ->addOrderBy('m.id', 'ASC');
+
+$stmt = $qb->executeQuery();
+$rows= $stmt->fetchAllAssociative();
 
 $groupedRounds = [];
 foreach ($rows as $row) {
@@ -92,12 +89,10 @@ function getMoveEmoji(string $move): string {
 <h1>Alle Spielrunden</h1>
 
 <?php
-// Durchlauf aller Runden
 foreach ($groupedRounds as $roundId => $round) {
     echo '<div class="round">';
     echo '<div><strong>Datum:</strong> ' . htmlspecialchars($round['played_at']) . '</div>';
 
-    // Durchlauf der Spieler in dieser Runde
     foreach ($round['players'] as $player) {
         $name = htmlspecialchars($player['name']);
         $move = htmlspecialchars(ucfirst($player['move']));
